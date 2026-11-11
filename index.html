@@ -37,6 +37,12 @@ main{padding:14px 16px 8px}
 .src{margin-top:9px;font-size:12px;color:var(--sub)}
 .src a{color:inherit}
 .empty{text-align:center;color:var(--sub);padding:40px 0}
+.links h2{font-size:16px;margin:0 0 8px}
+.links ul{margin:0;padding:0;list-style:none}
+.links li{margin:6px 0;font-size:15px}
+.links a{color:var(--navy2);font-weight:700}
+@media (prefers-color-scheme:dark){.links a{color:#c9d6f2}}
+.links .note{margin-top:10px;font-size:13px;color:var(--sub)}
 footer{padding:8px 16px 28px;font-size:12px;color:var(--sub);text-align:center}
 </style>
 </head>
@@ -51,6 +57,8 @@ footer{padding:8px 16px 28px;font-size:12px;color:var(--sub);text-align:center}
 <footer>공개 자료를 바탕으로 한 학습용 정리입니다. 최종 확인은 약관·원수사 기준</footer>
 <script>
 const CATS=["전체","용어","제도","청구","약관","유래"];let items=[],cur="전체";
+const TERMS_LINKS=[["삼성화재 보험상품공시실","https://www.samsungfire.com/vh/page/VH.HPIF0103.do"],["손해보험협회 상품비교공시","https://kpub.knia.or.kr/productDisc/guide/productInf.do"],["생명보험협회 공시실","https://pub.insure.or.kr/"]];
+function termsBox(){return `<section class="card links"><h2>약관 원문 바로가기</h2><ul>${TERMS_LINKS.map(([n,u])=>`<li><a href="${esc(safe(u))}" target="_blank" rel="noopener">${esc(n)} ↗</a></li>`).join("")}</ul><div class="note">약관은 가입 시기마다 다릅니다. 고객 약관은 증권의 상품명·판매 시기로 찾아 확인하세요</div></section>`;}
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safe=u=>/^https:\/\//.test(u)?u:"#";
 function tabs(){document.getElementById("tabs").innerHTML=CATS.map(c=>`<button class="${c===cur?"on":""}" data-c="${c}">${c}</button>`).join("");}
@@ -58,13 +66,13 @@ function render(){
  const q=document.getElementById("q").value.trim().toLowerCase();
  const L=items.filter(x=>(cur==="전체"||x.cat===cur)&&(!q||[x.title,...(x.body||[]),x.talk].join(" ").toLowerCase().includes(q)));
  document.getElementById("count").textContent=`${L.length}개`;
- document.getElementById("list").innerHTML=L.length?L.map(x=>{
+ document.getElementById("list").innerHTML=(cur==="약관"?termsBox():"")+(L.length?L.map(x=>{
   const m=x.month?`${x.month.slice(0,2)}년 ${+x.month.slice(2)}월 기준`:"";
   const src=(x.src||[]).map(s=>`<a href="${esc(safe(s.url))}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join(" / ");
   return `<article class="card"><div class="meta"><span class="cat">${esc(x.cat)}</span><span>${esc(x.date)}</span></div>
   <h2>${esc(x.title)}</h2><div class="body">${(x.body||[]).map(b=>`<p>${esc(b)}</p>`).join("")}</div>
   ${x.talk?`<div class="talk">상담에선: ${esc(x.talk)}</div>`:""}<div class="src">근거: ${src}${m?" · "+m:""}</div></article>`}).join("")
-  :`<div class="empty">${items.length?"찾는 한입이 없어요":"첫 한입을 준비하고 있어요"}</div>`;
+  :`<div class="empty">${items.length?"찾는 한입이 없어요":"첫 한입을 준비하고 있어요"}</div>`);
 }
 document.getElementById("tabs").addEventListener("click",e=>{const c=e.target.dataset.c;if(c){cur=c;tabs();render();}});
 document.getElementById("q").addEventListener("input",render);
