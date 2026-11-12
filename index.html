@@ -40,6 +40,7 @@ main{padding:14px 16px 8px}
 .links h2{font-size:16px;margin:0 0 8px}
 .links ul{margin:0;padding:0;list-style:none}
 .links li{margin:6px 0;font-size:15px}
+.links li.gap{margin-top:16px;padding-top:12px;border-top:1px dashed var(--line)}
 .links a{color:var(--navy2);font-weight:700}
 @media (prefers-color-scheme:dark){.links a{color:#c9d6f2}}
 .links .note{margin-top:10px;font-size:13px;color:var(--sub)}
@@ -58,8 +59,8 @@ footer{padding:8px 16px 28px;font-size:12px;color:var(--sub);text-align:center}
 <footer>공개 자료를 바탕으로 한 학습용 정리입니다. 최종 확인은 약관·원수사 기준</footer>
 <script>
 const CATS=["전체","용어","제도","청구","약관","유래"];let items=[],cur="전체";
-const TERMS_LINKS=[["삼성화재 보험상품공시실","https://www.samsungfire.com/vh/page/VH.HPIF0103.do"],["손해보험협회 상품비교공시","https://kpub.knia.or.kr/productDisc/guide/productInf.do"],["생명보험협회 공시실","https://pub.insure.or.kr/"]];
-function termsBox(){return `<section class="card links"><h2>약관 원문 바로가기</h2><ul>${TERMS_LINKS.map(([n,u])=>`<li><a href="${esc(safe(u))}" target="_blank" rel="noopener">${esc(n)} ↗</a></li>`).join("")}</ul><div class="note">약관은 가입 시기마다 다릅니다. 고객 약관은 증권의 상품명·판매 시기로 찾아 확인하세요</div></section>`;}
+const TERMS_LINKS=[["손해보험협회 상품비교공시","https://kpub.knia.or.kr/productDisc/guide/productInf.do"],["생명보험협회 공시실","https://pub.insure.or.kr/"],["삼성화재 보험상품공시실","https://www.samsungfire.com/vh/page/VH.HPIF0103.do","gap"]];
+function termsBox(){return `<section class="card links"><h2>약관 원문 바로가기</h2><ul>${TERMS_LINKS.map(([n,u,k])=>`<li${k?' class="gap"':""}><a href="${esc(safe(u))}" target="_blank" rel="noopener">${esc(n)} ↗</a></li>`).join("")}</ul><div class="note">약관은 가입 시기마다 다릅니다. 고객 약관은 증권의 상품명·판매 시기로 찾아 확인하세요</div></section>`;}
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safe=u=>/^https:\/\//.test(u)?u:"#";
 function tabs(){document.getElementById("tabs").innerHTML=CATS.map(c=>`<button class="${c===cur?"on":""}" data-c="${c}">${c}</button>`).join("");}
