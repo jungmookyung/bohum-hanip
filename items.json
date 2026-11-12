@@ -1,5 +1,39 @@
 [
  {
+  "id": "2611121821",
+  "date": "2026-11-12",
+  "cat": "제도",
+  "title": "초기 실손 할인 2가지, 11월 시행",
+  "body": [
+   "2013년 3월 이전 가입한 초기 실손이 대상입니다.",
+   "선택형 할인 특약은 불필요한 보장을 빼고 할인합니다.",
+   "계약전환 할인은 5세대로 바꾸면 일정 기간 할인합니다.",
+   "금융위는 계약전환 할인을 6개월 시행 후 연장을 검토합니다.",
+   "(단, 아직 시행 전(2026년 11월 예정))",
+   "(단, 2013.3 이전 초기 실손 대상, 11월 시행 예정(시작 미확인))"
+  ],
+  "talk": "유지·특약·전환, 세 가지를 비교해 보세요.",
+  "src": [
+   {
+    "name": "한국보험신문",
+    "url": "https://www.insnews.co.kr/news/articleView.html?idxno=90616"
+   },
+   {
+    "name": "금융위원회",
+    "url": "https://www.fsc.go.kr/po010103/86831"
+   },
+   {
+    "name": "금융위원회",
+    "url": "https://news.bizwatch.co.kr/article/finance/2026/10/20/0029"
+   },
+   {
+    "name": "금융위원회",
+    "url": "https://www.fsc.go.kr/no010101/86831?srchCtgry=&curPage=&srchKey=&srchText=&srchBeginDt=&srchEndDt="
+   }
+  ],
+  "month": "2611"
+ },
+ {
   "id": "2611121221",
   "date": "2026-11-12",
   "cat": "용어",
